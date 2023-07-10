@@ -44,16 +44,19 @@
 }
 
 .show__cart {
-    display: none;
+    display: block;
     position: absolute;
+    margin-top: 16rem;
 }
 
-.show__cart:hover {
+/* .show__cart:hover {
     display: block;
+    position: absolute;
     margin-top: 16rem;
 }
 
 .avatar:hover + .show__cart {
     display: block;
+    position: absolute;
     margin-top: 16rem;
-}
+} */

@@ -11,6 +11,9 @@ import ImageProduct4Thumbnail from "../../assets/images/image-product-4-thumbnai
 import ProductThumbnail from "./ProductThumbnail";
 import CartIcon from  '../../assets/icons/icon-cart-button.svg';
 
+import {useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../store/redux";
+
 const images = [
   {
     image: ImageProduct1Thumbnail,
@@ -27,6 +30,21 @@ const images = [
 ];
 
 export const Product = () => {
+  const productAmount = useSelector((state) => state.productAmount);
+  const dispatch = useDispatch();
+
+  const addAmountClickHandler = () => {
+    dispatch(cartActions.addToAmount());
+  }
+
+  const reduceAmountClickhandler = () => {
+    dispatch(cartActions.reduceAmount());
+  }
+
+  const addToCartHandler = () => {
+    dispatch(cartActions.addedToCart());
+  }
+
   return (
     <div className="product__container">
       <div className="product__left">
@@ -51,10 +69,10 @@ export const Product = () => {
         </div>
         <p className="original__price">$250.00</p>
         <div className="product__cart">
-            <button className="minus"></button>
-            <p>0</p>
-            <button className="plus"></button>
-            <button className="add-to-cart">
+            <button className="minus" onClick={reduceAmountClickhandler}></button>
+            <p>{productAmount}</p>
+            <button className="plus" onClick={addAmountClickHandler}></button>
+            <button className="add-to-cart" onClick={addToCartHandler}>
                 <img src={CartIcon} alt={CartIcon}/>Add to cart</button>
         </div>
       </div>
