@@ -9,10 +9,11 @@ import ImageProduct3Thumbnail from "../../assets/images/image-product-3-thumbnai
 import ImageProduct4Thumbnail from "../../assets/images/image-product-4-thumbnail.jpg";
 
 import ProductThumbnail from "./ProductThumbnail";
-import CartIcon from  '../../assets/icons/icon-cart-button.svg';
+import CartIcon from "../../assets/icons/icon-cart-button.svg";
+import ProductModal from "../UI/ProductModal";
 
-import {useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../store/redux";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions, modalActions } from "../store/redux";
 
 const images = [
   {
@@ -30,25 +31,29 @@ const images = [
 ];
 
 export const Product = () => {
-  const productAmount = useSelector((state) => state.productAmount);
+  const productAmount = useSelector((state) => state.cart.productAmount);
   const dispatch = useDispatch();
 
   const addAmountClickHandler = () => {
     dispatch(cartActions.addToAmount());
-  }
+  };
 
   const reduceAmountClickhandler = () => {
     dispatch(cartActions.reduceAmount());
-  }
+  };
 
   const addToCartHandler = () => {
     dispatch(cartActions.addedToCart());
+  };
+
+  const openModal = () => {
+    dispatch(modalActions.openOrCloseModal(MainImage));
   }
 
   return (
     <div className="product__container">
       <div className="product__left">
-        <img src={MainImage} alt={MainImage} />
+        <img onClick={openModal} src={MainImage} alt={MainImage} />
         <div className="product__thumbnail-images">
           {images.map((img) => {
             return <ProductThumbnail img={img.image} />;
@@ -64,16 +69,18 @@ export const Product = () => {
           the weather can offer.
         </p>
         <div className="product__price">
-            <h2>$125.00</h2>
-            <p>50%</p>
+          <h2>$125.00</h2>
+          <p>50%</p>
         </div>
         <p className="original__price">$250.00</p>
         <div className="product__cart">
-            <button className="minus" onClick={reduceAmountClickhandler}></button>
-            <p>{productAmount}</p>
-            <button className="plus" onClick={addAmountClickHandler}></button>
-            <button className="add-to-cart" onClick={addToCartHandler}>
-                <img src={CartIcon} alt={CartIcon}/>Add to cart</button>
+          <button className="minus" onClick={reduceAmountClickhandler}></button>
+          <p>{productAmount}</p>
+          <button className="plus" onClick={addAmountClickHandler}></button>
+          <button className="add-to-cart" onClick={addToCartHandler}>
+            <img src={CartIcon} alt={CartIcon} />
+            Add to cart
+          </button>
         </div>
       </div>
     </div>

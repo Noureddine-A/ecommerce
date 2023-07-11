@@ -9,6 +9,20 @@ const initialState = {
     amountAddedToCart: 0,
 }
 
+const modalSlice = createSlice({
+    name: 'modal',
+    initialState: {
+        close: false,
+        img: undefined
+    },
+    reducers: {
+        openOrCloseModal: (state, action) => {
+            state.close = !state.close;
+            state.img = action.payload;
+        }
+    }
+})
+
 const cartSlice = createSlice({
     name: 'store',
     initialState,
@@ -45,9 +59,13 @@ const cartSlice = createSlice({
 })
 
 const store = configureStore({
-    reducer: cartSlice.reducer
+    reducer: {
+        cart: cartSlice.reducer,
+        modal: modalSlice.reducer
+    } 
 })
 
 export default store;
 
 export const cartActions = cartSlice.actions;
+export const modalActions = modalSlice.actions

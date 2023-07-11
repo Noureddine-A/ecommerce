@@ -6,9 +6,9 @@ import { cartActions } from "../store/redux";
 import "./Cart.css";
 
 const Cart = () => {
-  const cartProductPrice = useSelector((state) => state.productPrice);
-  const cartAmountAddedToCart = useSelector(state => state.amountAddedToCart);
-  const cartEmpty = useSelector(state => state.addedToCart);
+  const cartProductPrice = useSelector((state) => state.cart.productPrice);
+  const cartAmountAddedToCart = useSelector(state => state.cart.amountAddedToCart);
+  const cartEmpty = useSelector(state => state.cart.addedToCart);
 
   const dispatch = useDispatch();
 
