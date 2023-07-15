@@ -2,17 +2,35 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./ProductModal.css";
+import ImageProduct1Thumbnail from "../../assets/images/image-product-1-thumbnail.jpg";
+import ImageProduct2Thumbnail from "../../assets/images/image-product-2-thumbnail.jpg";
+import ImageProduct3Thumbnail from "../../assets/images/image-product-3-thumbnail.jpg";
+import ImageProduct4Thumbnail from "../../assets/images/image-product-4-thumbnail.jpg";
 
-import Image from "../../assets/images/image-product-1.jpg";
 import CloseIcon from "../../assets/icons/icon-close.svg";
 import CloseIconHovered from "../../assets/icons/icon-close-hovered.svg";
 import { modalActions } from "../store/redux";
+import ProductThumbnail from "../body/ProductThumbnail";
+
+const images = [
+  {
+    image: ImageProduct1Thumbnail,
+  },
+  {
+    image: ImageProduct2Thumbnail,
+  },
+  {
+    image: ImageProduct3Thumbnail,
+  },
+  {
+    image: ImageProduct4Thumbnail,
+  },
+];
 
 const ProductModal = (props) => {
   const [changeIcon, setChangeIcon] = useState(false);
 
-  const modalClosed = useSelector(state => state.modal.close);
-  const picture = useSelector(state => state.modal.img);
+  const picture = useSelector((state) => state.modal.img);
   const dispatch = useDispatch();
 
   let icon = CloseIcon;
@@ -31,11 +49,11 @@ const ProductModal = (props) => {
 
   const removeColorIcon = () => {
     setChangeIcon(false);
-  }
+  };
 
   const closeClickHandler = () => {
     dispatch(modalActions.openOrCloseModal());
-  }
+  };
 
   return (
     <div className="backdrop">
@@ -50,7 +68,15 @@ const ProductModal = (props) => {
             onClick={closeClickHandler}
           />
         </div>
-        <img className="product__picture" src={picture} alt={picture} />
+        <div className="product__picture">
+          <img src={picture} alt={picture} />
+        </div>
+
+        <div className="product__thumbnails">
+          {images.map((img) => {
+            return <ProductThumbnail img={img.image} />;
+          })}
+        </div>
       </div>
     </div>
   );

@@ -19,6 +19,10 @@ const modalSlice = createSlice({
         openOrCloseModal: (state, action) => {
             state.close = !state.close;
             state.img = action.payload;
+
+        },
+        changePictureInModal: (state, action) => {
+            state.img = action.payload;
         }
     }
 })

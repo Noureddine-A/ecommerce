@@ -7,7 +7,7 @@ import Product from "./components/body/Product";
 import ProductModal from "./components/UI/ProductModal";
 
 function App() {
-  const modalClosed = useSelector(state => state.modal.close);
+  const modalOpen = useSelector(state => state.modal.close);
 
   return (
     <div className="app__container">
@@ -17,7 +17,7 @@ function App() {
         <section id="body">
           <Product />
         </section>
-      {modalClosed &&<ProductModal/>}
+      {modalOpen && <ProductModal/>}
     </div>
   );
 }
